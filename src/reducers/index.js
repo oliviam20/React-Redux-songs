@@ -1,3 +1,6 @@
+// named export use {}
+import { combineReducers } from 'redux';
+
 // reducers
 const songsReducer = () => {
   return [
@@ -15,3 +18,9 @@ const selectedSongReducer = (selectedSong = null, action) => {
 
   return selectedSong;
 };
+
+// combine all the reducers and export them for other places that the app can use. the keys here will become the state keys
+export default combineReducers({
+  songs: songsReducer,
+  selectedSong: selectedSongReducer
+});
