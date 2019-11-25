@@ -5,16 +5,35 @@ This is for practicing react with redux. There are comments within the code the 
 ## Notes
 
 ### Connect
-The connect function gets data from the store and passes it to the component. See SongList.js
+The connect function gets data from the store and passes it to the component.
 ```
+// SongList.js
 import { connect } from 'react-redux';
 
 // the state is passed in by Provider as store={createStore(reducers)} in src/index.js
 const mapStateToProps = (state) => {
-  return { songs: state.songs }
+  return { song: state.songs }
 };
 
 export default connect(mapStateToProps)(SongList);
+
+// SongDetail.js
+const SongDetail = (props) => {
+  console.log(props)
+  // output from props is from passing mapStateToProps to connect()()
+  <!-- output:
+  { mySelectedSong: {
+    title: 'Whisper',
+    duration: '3:52
+  }} -->
+  return <div>song detail</div>
+};
+
+const mapStateToProps = (state) => {
+  return { mySelectedSong: state.selectedSong }
+};
+
+export default connect(mapStateToProps)(SongDetail);
 ```
 
 The connect function also gets action creators into components e.g. SongList.
