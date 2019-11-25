@@ -5,16 +5,33 @@ This is for practicing react with redux. There are comments within the code the 
 ## Notes
 
 ### Connect
-the connect function gets data from the store and passes it to the component. See SongList.js
+The connect function gets data from the store and passes it to the component. See SongList.js
 ```
 import { connect } from 'react-redux';
 
+// the state is passed in by Provider as store={createStore(reducers)} in src/index.js
 const mapStateToProps = (state) => {
   return { songs: state.songs }
 };
 
 export default connect(mapStateToProps)(SongList);
 ```
+
+The connect function also gets action creators into components e.g. SongList.
+
+We first import the action creators and pass it to the second argument of connect as an object.
+
+The connect function will take the `selectSong` action creator pass it into the `SongList` component as a prop. It cannot be called directly (without passing it to `connect` first).
+
+Redux does not automatically detect action creators being called and does not automatically detect a function returning an object that is an 'action', so we must pass `selectSong` to connect so it will be passed through the reducers and then to store. (Directly calling the action creator like a function e.g. `selectSong()` will not pass through the redux and will just return an object, so DONT call it directly).
+
+We don't use `dispatch` here because by passing the `selectSong` (an action creator) into `connect`, whenever the `this.props.selectSong` gets called, `connect` will take the action that gets returned and `dispatch` it for us.
+```
+import { selectSong } from '../../actions/index.js';
+
+export default connect(mapStateToProps, { selectSong })(SongList);
+```
+In the object, `{ selectSong }` is ES6 syntax. It is the same as `{ selectSong: selectSong }`.
 
 ### Provider
 Provider is used to wrap the App component, passing it the entire store. See src/index.js
