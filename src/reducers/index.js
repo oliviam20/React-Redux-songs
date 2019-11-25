@@ -19,7 +19,7 @@ const selectedSongReducer = (selectedSong = null, action) => {
   return selectedSong;
 };
 
-// combine all the reducers and export them for other places that the app can use. the keys here will become the state keys
+// combine all the reducers and export them for other places that the app can use (e.g src/index.js). the keys here will become the state keys
 export default combineReducers({
   songs: songsReducer,
   selectedSong: selectedSongReducer
