@@ -18,6 +18,7 @@ export default connect(mapStateToProps)(SongList);
 
 ### Provider
 Provider is used to wrap the App component, passing it the entire store. See src/index.js
+
 Create a redux store using createStore, passing in our reducers (songs, selectedSong) exported from the reducer file
 ```
 import { Provider } from 'react-redux';
