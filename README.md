@@ -1,4 +1,6 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a very simple app that displays a list of songs and the currently selected song.
+
+This is for practicing react with redux. There are comments within the code the explain how it works.
 
 ## Available Scripts
 
