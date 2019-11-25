@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { selectSong } from '../../actions';
 
 class SongList extends Component {
   renderList = () => {
@@ -7,7 +8,7 @@ class SongList extends Component {
       return (
         <div className="item" key={song.title}>
           <div className="right floated content">
-            <button className="ui button primary">
+            <button className="ui button primary" onClick={() => this.props.selectSong(song)}>
               Select
             </button>
           </div>
@@ -26,6 +27,7 @@ class SongList extends Component {
 
 // passing the entire state from store to mapStateToProps
 // return the list of songs from the store as props to the SongList component (in the connect function below)
+// the state is passed in by Provider as store={createStore(reducers)} in src/index.js
 const mapStateToProps = (state) => {
   return { songs: state.songs }
 };
@@ -37,7 +39,8 @@ const mapStateToProps = (state) => {
 //   }
 // }
 // Here, we pass to connect mapStateToProps and SongList. mapStateToProps is returning the list of songs from state. connect will pass the list of songs as props to the SongList component.
-export default connect(mapStateToProps)(SongList);
+// The connect function will take the `selectSong` action creator pass it into the `SongList` component as a prop.
+export default connect(mapStateToProps, { selectSong })(SongList);
 
 // Only need to import connect in the component, not the App component
 // connect is actually a react component
